@@ -1,0 +1,25 @@
+# Sets up an application set that controls all applications defined under apps/
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/abiydv/argocd-apps.git
+      revision: HEAD
+      directories:
+	      - path: apps/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/abiydv/argocd-apps.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'

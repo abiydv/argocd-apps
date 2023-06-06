@@ -1,0 +1,21 @@
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: default
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: true
+        editable: false
+        options:
+          path: /var/lib/grafana/dashboards/default
+
+# This does not work, expects the dashboad in the chart repo. Resulting dashboard configMap is empty.
+#  
+# dashboards:
+#   default:
+#     custom1:
+#       file: dashboards/custom1.json
+#     custom2:
+#       file: dashboards/custom2.json
